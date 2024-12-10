@@ -20,7 +20,7 @@ configurations {
 }
 
 repositories {
-	mavenCentral()
+	mavenCentral() //라이브러리 다운받는 곳
 }
 
 dependencies {
@@ -32,6 +32,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
