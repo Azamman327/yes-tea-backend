@@ -1,34 +1,45 @@
 package com.example.tea_backend.controller;
 
-import com.example.tea_backend.domain.User;
-import com.example.tea_backend.repository.UserRepository;
+import com.example.tea_backend.domain.Users;
+import com.example.tea_backend.repository.UsersRepository;
+import com.example.tea_backend.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @Controller
-@RequestMapping(path="/user")
-public class UserController {
+@RequestMapping(path="/users")
+public class UsersController {
+
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
+    private UsersService usersService;
 
     //test
-    @GetMapping(path="/all")
-    public @ResponseBody List<User>
+    @GetMapping
+    public @ResponseBody Iterable<Users> getAllUsers() {
+        return usersRepository.findAll();
+    }
 
     @PostMapping(path="/create")
-    public @ResponseBody String createNewUser (@RequestParam String name, @RequestParam String password) {
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        userRepository.save(user);
+    public @ResponseBody String createNewUser (@RequestBody Users request) {
+        Users users = new Users();
+        users.setName(request.getName());
+        users.setPassword(request.getPassword());
+        usersRepository.save(users);
         return "create";
     }
 
-    @GetMapping("/")
-    public @ResponseBody Optional<User> findByUserId(@RequestParam long userId) {
-        return userRepository.findByUserId(userId);
+    @GetMapping("/find-by-id")
+    public @ResponseBody Optional<Users> findByUserId(@RequestParam(name="userId") long userId) {
+        return usersRepository.findByUserId(userId);
+    }
+
+    @GetMapping("/login")
+    public @ResponseBody int login(@RequestParam(name="name") String name, @RequestParam(name="password") String enteredPassword) {
+        return usersService.login(name, enteredPassword);
     }
 }
