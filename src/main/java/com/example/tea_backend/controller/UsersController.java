@@ -16,6 +16,7 @@ public class UsersController {
 
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
     private UsersService usersService;
 
     //test

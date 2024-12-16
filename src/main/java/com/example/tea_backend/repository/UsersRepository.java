@@ -13,6 +13,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     //Optional : 찾는 객체가 없을 시 NULL 반환
     Optional<Users> findByUserId(long userId);
 
-    @Query("select * from Users where name = :name")
+    @Query("SELECT users FROM Users users WHERE name = :name")
     Optional<Users> findByName(@Param("name")String name);
 }
