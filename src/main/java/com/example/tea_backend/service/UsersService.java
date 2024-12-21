@@ -21,17 +21,19 @@ public class UsersService {
 
     public String login(String name, String enteredPassword) {
         Optional<Users> user = usersRepository.findByName(name);
-        String storedPassword = Optional.ofNullable(user.get().getPassword()).orElse(null);
+        String storedPassword = "";
 
-
-        if (storedPassword == null) {
+        if (user.isEmpty()) {
             return NO_USER;
         }
-        if (enteredPassword.equals(storedPassword)) {
-            return SUCCESS;
-        }
         else {
-            return FAILURE;
+            storedPassword = user.get().getPassword();
+
+            if (enteredPassword.equals(storedPassword)) {
+                return SUCCESS;
+            } else {
+                return FAILURE;
+            }
         }
     }
 }
