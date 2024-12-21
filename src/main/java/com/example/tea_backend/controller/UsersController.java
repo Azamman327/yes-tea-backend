@@ -40,7 +40,9 @@ public class UsersController {
     }
 
     @GetMapping("/login")
-    public @ResponseBody int login(@RequestParam(name="name") String name, @RequestParam(name="password") String enteredPassword) {
-        return usersService.login(name, enteredPassword);
+    public @ResponseBody String login(@RequestParam(name="name") String name, @RequestParam(name="password") String enteredPassword) {
+        String result = usersService.login(name, enteredPassword);
+        System.out.println(result);
+        return result;
     }
 }

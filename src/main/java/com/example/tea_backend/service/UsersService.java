@@ -14,12 +14,12 @@ public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
-    final int NO_USER = 0;
-    final int SUCCESS = 1;
-    final int FAILURE = 2;
+    final String NO_USER = "NO_USER";
+    final String SUCCESS = "SUCCESS";
+    final String FAILURE = "FAILURE";
 
 
-    public int login(String name, String enteredPassword) {
+    public String login(String name, String enteredPassword) {
         Optional<Users> user = usersRepository.findByName(name);
         String storedPassword = Optional.ofNullable(user.get().getPassword()).orElse(null);
 
