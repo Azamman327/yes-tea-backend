@@ -4,6 +4,7 @@ import com.example.tea_backend.domain.Users;
 import com.example.tea_backend.repository.UsersRepository;
 import com.example.tea_backend.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,10 +40,8 @@ public class UsersController {
         return usersRepository.findByUserId(userId);
     }
 
-    @GetMapping("/login")
-    public @ResponseBody String login(@RequestParam(name="name") String name, @RequestParam(name="password") String enteredPassword) {
-        String result = usersService.login(name, enteredPassword);
-        System.out.println(result);
-        return result;
+    @PostMapping("/login")
+    public @ResponseBody ResponseEntity<Optional<Users>> login(@RequestBody Users request) {
+        return ResponseEntity.ok(usersService.login(request));
     }
 }
