@@ -7,10 +7,7 @@ import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @Controller
@@ -21,7 +18,7 @@ public class TeasController {
     private TeasRepository teasRepository;
 
     @PostMapping(path="/create")
-    public void createTea(@RequestBody Teas request) {
+    public @ResponseBody Long createTea(@RequestBody Teas request) {
         Teas teas = new Teas();
 
         teas.setBrand(request.getBrand());
@@ -35,7 +32,6 @@ public class TeasController {
         teas.setWatervolume(request.getWatervolume());
 
         Teas newTea = teasRepository.save(teas);
-        log.info(" info log={}", newTea.getTeaId());
-//        return
+        return newTea.getTeaId();
     }
 }
