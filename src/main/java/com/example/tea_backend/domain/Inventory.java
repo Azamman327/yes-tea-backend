@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -19,7 +19,5 @@ public class Inventory {
     private InventoryId inventoryId;
 
     private int amount;
-    private int year;   //expired
-    private int month;  //expired
-    private int day;    //expired
+    private LocalDate expired;
 }
