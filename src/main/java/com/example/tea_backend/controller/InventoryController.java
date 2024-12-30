@@ -2,17 +2,17 @@ package com.example.tea_backend.controller;
 
 import com.example.tea_backend.domain.Inventory;
 import com.example.tea_backend.domain.InventoryId;
-import com.example.tea_backend.domain.Teas;
-import com.example.tea_backend.dto.InventoryDto;
+import com.example.tea_backend.dto.InventoryAddReq;
+import com.example.tea_backend.dto.InventoryListRes;
 import com.example.tea_backend.repository.InventoryRepository;
-import com.example.tea_backend.repository.TeasRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @Controller
@@ -22,8 +22,15 @@ public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    @GetMapping(path="/user/{userId}")
+    public @ResponseBody List<InventoryListRes> getInventoryList(@RequestBody Long userId) {
+        List<InventoryListRes> inventories = new ArrayList<>();
+
+        return inventories;
+    }
+
     @PostMapping(path="/create")
-    public @ResponseBody InventoryId createInventory(@RequestBody InventoryDto request) {
+    public @ResponseBody InventoryId createInventory(@RequestBody InventoryAddReq request) {
         Inventory inventory = new Inventory();
 
         InventoryId id = new InventoryId();
