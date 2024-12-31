@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class InventoryAddReq {
+public class InventoryReqDto {
     private InventoryId inventoryId;
     private int amount;
     private String expired;

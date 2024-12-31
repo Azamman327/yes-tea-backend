@@ -8,4 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface TeasRepository extends JpaRepository<Teas, Long> {
+    Optional<Teas> findById(Long teaId);
 }
