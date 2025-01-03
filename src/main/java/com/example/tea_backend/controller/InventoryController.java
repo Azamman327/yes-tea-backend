@@ -53,4 +53,9 @@ public class InventoryController {
 
         return newInventory.getInventoryId();
     }
+
+    @DeleteMapping(path="/delete")
+    public void deleteInventory(@RequestBody List<InventoryWithTeasDto> request) {
+        inventoryService.deleteInventory(request);
+    }
 }

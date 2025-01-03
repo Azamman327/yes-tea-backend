@@ -37,4 +37,11 @@ public class InventoryService {
 
         return inventoryListRes;
     }
+
+    public void deleteInventory(List<InventoryWithTeasDto> deleteTeas) {
+        int length = deleteTeas.size();
+        for (int i = 0; i < length; i++) {
+            inventoryRepository.delete(deleteTeas.get(i).getInventory());
+        }
+    }
 }
