@@ -25,6 +25,13 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @GetMapping(path="user/{userId}/detail/{teaId}")
+    public @ResponseBody InventoryWithTeasDto getInventoryWithTea(@PathVariable("userId") Long userId, @PathVariable("teaId") Long teaId) {
+        InventoryWithTeasDto inventoryWithTea = inventoryService.getInventoryWithTea(userId, teaId);
+
+        return inventoryWithTea;
+    }
+
     @GetMapping(path="/user/{userId}")
     public @ResponseBody List<InventoryWithTeasDto> getInventoryList(@PathVariable("userId") Long userId) {
         List<InventoryWithTeasDto> inventories = new ArrayList<>();

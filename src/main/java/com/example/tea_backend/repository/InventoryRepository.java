@@ -12,5 +12,6 @@ import java.util.List;
 
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, InventoryId> {
+    Inventory findByInventoryId(InventoryId inventoryId);
     List<Inventory> findAllByInventoryIdUserId(Long userId);
 }
