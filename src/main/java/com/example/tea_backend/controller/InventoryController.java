@@ -48,17 +48,19 @@ public class InventoryController {
         id.setUserId(request.getInventoryId().getUserId());
         id.setTeaId(request.getInventoryId().getTeaId());
 
-        log.info("datetime: {}", LocalDate.parse(request.getExpired()));
-
         inventory.setInventoryId(id);
         inventory.setAmount(request.getAmount());
         inventory.setExpired(LocalDate.parse(request.getExpired()));
 
-        log.info("teaId: {}", id.getTeaId());
-
         Inventory newInventory = inventoryRepository.save(inventory);
 
         return newInventory.getInventoryId();
+    }
+
+    @PutMapping(path="/update")
+    public @ResponseBody InventoryId updateInventory(@RequestBody InventoryReqDto request) {
+        InventoryId inventoryId = inventoryService.updateInventory(request);
+        return inventoryId;
     }
 
     @DeleteMapping(path="/delete")

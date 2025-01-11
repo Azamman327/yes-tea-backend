@@ -3,6 +3,7 @@ package com.example.tea_backend.service;
 import com.example.tea_backend.domain.Inventory;
 import com.example.tea_backend.domain.InventoryId;
 import com.example.tea_backend.domain.Teas;
+import com.example.tea_backend.dto.InventoryReqDto;
 import com.example.tea_backend.dto.InventoryWithTeasDto;
 import com.example.tea_backend.repository.InventoryRepository;
 import com.example.tea_backend.repository.TeasRepository;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +53,17 @@ public class InventoryService {
         }
 
         return inventoryListRes;
+    }
+
+    public InventoryId updateInventory(InventoryReqDto request) {
+        Inventory inventory = inventoryRepository.findByInventoryId(request.getInventoryId());
+
+        inventory.setInventoryId(request.getInventoryId());
+        inventory.setAmount(request.getAmount());
+        inventory.setExpired(LocalDate.parse(request.getExpired()));
+
+        Inventory updatedInventory = inventoryRepository.save(inventory);
+        return updatedInventory.getInventoryId();
     }
 
     public void deleteInventory(List<InventoryWithTeasDto> deleteTeas) {
