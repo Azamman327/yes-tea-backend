@@ -55,6 +55,22 @@ public class InventoryService {
         return inventoryListRes;
     }
 
+    public InventoryId createInventory(InventoryReqDto request) {
+        Inventory inventory = new Inventory();
+
+        InventoryId id = new InventoryId();
+        id.setUserId(request.getInventoryId().getUserId());
+        id.setTeaId(request.getInventoryId().getTeaId());
+
+        inventory.setInventoryId(id);
+        inventory.setAmount(request.getAmount());
+        inventory.setExpired(LocalDate.parse(request.getExpired()));
+
+        Inventory newInventory = inventoryRepository.save(inventory);
+
+        return newInventory.getInventoryId();
+    }
+
     public InventoryId updateInventory(InventoryReqDto request) {
         Inventory inventory = inventoryRepository.findByInventoryId(request.getInventoryId());
 

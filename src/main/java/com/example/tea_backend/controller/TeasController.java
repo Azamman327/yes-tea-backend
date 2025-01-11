@@ -20,20 +20,7 @@ public class TeasController {
 
     @PostMapping(path="/create")
     public @ResponseBody Long createTea(@RequestBody Teas request) {
-        Teas teas = new Teas();
-
-        teas.setBrand(request.getBrand());
-        teas.setName(request.getName());
-        teas.setPackagingtype(request.getPackagingtype());
-        teas.setType(request.getType());
-        teas.setMinute(request.getMinute());
-        teas.setSecond(request.getSecond());
-        teas.setTemperature(request.getTemperature());
-        teas.setQuantity(request.getQuantity());
-        teas.setWatervolume(request.getWatervolume());
-
-        Teas newTea = teasRepository.save(teas);
-        return newTea.getTeaId();
+        return teasService.createTea(request);
     }
 
     @PutMapping(path="/update")

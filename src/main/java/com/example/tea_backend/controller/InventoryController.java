@@ -42,25 +42,12 @@ public class InventoryController {
 
     @PostMapping(path="/create")
     public @ResponseBody InventoryId createInventory(@RequestBody InventoryReqDto request) {
-        Inventory inventory = new Inventory();
-
-        InventoryId id = new InventoryId();
-        id.setUserId(request.getInventoryId().getUserId());
-        id.setTeaId(request.getInventoryId().getTeaId());
-
-        inventory.setInventoryId(id);
-        inventory.setAmount(request.getAmount());
-        inventory.setExpired(LocalDate.parse(request.getExpired()));
-
-        Inventory newInventory = inventoryRepository.save(inventory);
-
-        return newInventory.getInventoryId();
+        return inventoryService.createInventory(request);
     }
 
     @PutMapping(path="/update")
     public @ResponseBody InventoryId updateInventory(@RequestBody InventoryReqDto request) {
-        InventoryId inventoryId = inventoryService.updateInventory(request);
-        return inventoryId;
+        return inventoryService.updateInventory(request);
     }
 
     @DeleteMapping(path="/delete")
