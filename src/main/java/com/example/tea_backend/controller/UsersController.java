@@ -20,7 +20,6 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    //test
     @GetMapping
     public @ResponseBody Iterable<Users> getAllUsers() {
         return usersRepository.findAll();
